@@ -1,0 +1,38 @@
+
+body{
+	margin:0;
+	text-align:center;
+}
+div.content{
+	color:red;
+}
+p{
+	color:gray
+}
+#oclock{
+	position:absolute;
+	bottom:8%;
+	left:50%;
+	transform:translateX(-50%);
+}
+body,html{
+	height:100%;
+	width:100%;
+}
+header,footer{
+	width:100%;
+	height:50px;
+	line-height:50px;
+	text-align:center;
+	background:#0c0c0e;
+	color:white;
+	text-transform:uppercase;
+}
+footer{
+	position:absolute;
+	bottom:0;
+}
+footer >p,header >p{
+	color:white;
+	margin:0;
+}
