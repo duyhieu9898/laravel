@@ -11,19 +11,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(sanphamTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
     }
-    
+
 }
 //php artisan db:seed
 class sanphamTableSeeder extends seeder
 {
-	public function run()
+    public function run()
     {
-    	DB::table('sanpham')->insert([
-    		['id_san_pham'=>str_random(5),'ten san pham'=>str_random(10)],
-    		['id_san_pham'=>str_random(5),'ten san pham'=>str_random(10)],
-    		['id_san_pham'=>str_random(5),'ten san pham'=>str_random(10)]
-    	]);
+        DB::table('sanpham')->insert([
+            ['id_san_pham' => str_random(5), 'ten san pham' => str_random(10)],
+            ['id_san_pham' => str_random(5), 'ten san pham' => str_random(10)],
+            ['id_san_pham' => str_random(5), 'ten san pham' => str_random(10)],
+        ]);
     }
 }

@@ -33,8 +33,14 @@
 
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
+                                        <strong>{{ $errors->first('password') }}
                                     </span>
+                                @endif
+                                @if ($errors->has('errorlogin'))
+                                    <div class="alert alert-danger">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                        <strong>{{$errors->first('errorlogin')}}</strong>
+                                    </div>
                                 @endif
                             </div>
                         </div>
@@ -57,9 +63,7 @@
                                     {{ __('Login') }}
                                 </button>
 
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('Forgot Your Password?') }}
-                                </a>
+
                             </div>
                         </div>
                     </form>

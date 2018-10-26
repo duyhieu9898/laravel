@@ -12,7 +12,7 @@
  */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 Route::get('hello/{name?}', function ($name = "computer") {
     echo "hello laravel <br />";
@@ -230,7 +230,7 @@ Route::get('login-vadidate', function () {
     return view('form-vadidate');
 });
 Route::get('vadidate-form', 'vadidate@index')->name('vadidate-form');
-//nex
+//next
 Route::get("complete", function () {
     echo 'complete';
 })->name("login-complete");
@@ -246,9 +246,8 @@ route::get('vadidate-auth',
 route::get('vuejs', function () {
     return view('vuejs.index');
 });
-Route::get('auth/facebook', 'Auth\LoginController@redirectToFacebook')->name('auth.facebook');
-Route::get('auth/facebook/callback', 'Auth\LoginController@handleFacebookCallback');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('auth/facebook', 'Auth\LoginController@redirectToFacebook')->name('auth.facebook');
+// Route::get('auth/facebook/callback', 'Auth\LoginController@handleFacebookCallback');
+Route::get('login', 'LoginController@getLogin');
+Route::post('login', 'LoginController@postLogin')->name('login');
+Route::post('logout', 'LoginController@postLogout')->name('logout');

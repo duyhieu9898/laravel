@@ -10,7 +10,9 @@
 <body>
 	<form action="{{route('vadidate-auth')}}" method="get" accept-charset="utf-8">
 		{{ csrf_field() }}
-		{{session('errors')->first('error')}}
+		@if($errors->has('error'))
+			<p style="color:red">{{session('errors')->first('error')}}</p>
+		@endif
 		<input type="text" name="name" value="" placeholder="">
 		<input type="text" name="password" value="" placeholder="">
 		<input type="submit" value='submit' >
