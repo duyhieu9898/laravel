@@ -8,7 +8,10 @@
     </head>
     <body>
         <div id="app">
-            <User></User>
+            <user></user>
+        </div>
+        <div id="app-2">
+
         </div>
         <script src="/js/app.js"></script>
     </body>

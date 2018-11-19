@@ -30719,7 +30719,7 @@ Vue.component('user', __webpack_require__(224));
 var app = new Vue({
     el: '#app',
     data: {
-        message: 'passed data.message old to app.js'
+        message: 'Hello vuejs'
     }
 });
 var app2 = new Vue({
