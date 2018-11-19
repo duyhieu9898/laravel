@@ -4,7 +4,7 @@ use App\Role;
 use App\User;
 use Illuminate\Database\Seeder;
 
-class UsersTableSeeder extends Seeder
+class UserTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,13 +13,6 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        //
-        DB::table('users')->truncate();
-        App\User::create([
-            'name' => 'hieu',
-            'email' => 'duyhieu9898@gmail.com',
-            'password' => bcrypt('mkla251098'),
-        ]);
         $role_employee = Role::where('name', 'employee')->first();
         $role_manager = Role::where('name', 'admin')->first();
         $role_saler = Role::where('name', 'saler')->first();

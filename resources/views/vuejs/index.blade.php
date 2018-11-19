@@ -9,6 +9,7 @@
 </head>
 
 <body>
+
     <div id="app">
         <my-component ></my-component>
         {{-- @{{message}} --}}
@@ -18,6 +19,9 @@
         <re-render></re-render>
         <binding-html></binding-html>
         <input-binding></input-binding>
+        <event-handling></event-handling>
+        <api-calling></api-calling>
+        <user></user>
    </div>
    <hr />
     <div id="app-2">

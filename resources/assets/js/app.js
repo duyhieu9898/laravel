@@ -21,6 +21,9 @@ Vue.component('life-cycle', require('./components/LifeCycle.vue'));
 Vue.component('re-render', require('./components/Re-renderDom.vue'));
 Vue.component('binding-html', require('./components/BindingHTML.vue'));
 Vue.component('input-binding', require('./components/InputBinding.vue'));
+Vue.component('event-handling', require('./components/EventHandling.vue'));
+Vue.component('api-calling', require('./components/ApiCalling.vue'));
+Vue.component('user', require('./components/User.vue'));
 const app = new Vue({
     el: '#app',
     data: {

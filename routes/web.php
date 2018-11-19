@@ -11,9 +11,6 @@
 |
  */
 
-Route::get('/', function () {
-    return view('home');
-});
 Route::get('hello/{name?}', function ($name = "computer") {
     echo "hello laravel <br />";
     echo "i am " . $name;
@@ -246,8 +243,30 @@ route::get('vadidate-auth',
 route::get('vuejs', function () {
     return view('vuejs.index');
 });
-// Route::get('auth/facebook', 'Auth\LoginController@redirectToFacebook')->name('auth.facebook');
-// Route::get('auth/facebook/callback', 'Auth\LoginController@handleFacebookCallback');
+Route::get('auth/facebook', 'Auth\LoginController@redirectToFacebook')->name('auth.facebook');
+Route::get('auth/facebook/callback', 'Auth\LoginController@handleFacebookCallback');
 Route::get('login', 'LoginController@getLogin');
 Route::post('login', 'LoginController@postLogin')->name('login');
 Route::post('logout', 'LoginController@postLogout')->name('logout');
+//vue
+Route::resource('products', 'ProductController');
+Route::get('test/product', 'productController@index');
+
+Auth::routes();
+
+Route::get('/', function () {
+    return view('welcome');
+})->middleware('auth');
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/admin-home', function () {
+    return view("home");
+});
+Route::resource('users', 'UserController');
+
+//để lấy thông tin về user hiện tại đang login, mình lấy kèm theo danh sách quyền của user đó
+Route::get('/getCurrentUser', function () {
+    return Auth::user()->load('roles');
+});
+//chỉ cần bắt được request với method là get hoặc post thì mình sẽ đều cho user logout ra khỏi app
+Route::match(['get', 'post'], '/logout', 'Auth\LoginController@logout')->name('logout');
