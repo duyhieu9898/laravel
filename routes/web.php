@@ -270,3 +270,4 @@ Route::get('/getCurrentUser', function () {
 });
 //chỉ cần bắt được request với method là get hoặc post thì mình sẽ đều cho user logout ra khỏi app
 Route::match(['get', 'post'], '/logout', 'Auth\LoginController@logout')->name('logout');
+route::get('dd/{id}', 'UserController@update');

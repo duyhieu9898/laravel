@@ -65895,8 +65895,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -67430,6 +67428,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -67484,6 +67503,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this3.getListUsers();
             }).catch(function (error) {
                 console.log(error);
+            });
+        },
+        updateUser: function updateUser(user) {
+            axios.put('/users/' + user.id, { id: user.id, name: user.name, email: user.email, role: user.roles[0].name }).then(function (response) {
+                console.log(response.data.result);
+                user.isEdit = false;
+            }).catch(function (errors) {
+                if (errors.response.data.errors) console.log(errors.response.data.errors);
             });
         },
         validateEmail: function validateEmail(email) {
@@ -67602,40 +67629,183 @@ var render = function() {
         _vm.list_users.length
           ? _c(
               "tbody",
-              _vm._l(_vm.list_users, function(user) {
+              _vm._l(_vm.list_users, function(user, index) {
                 return _c("tr", [
                   _c("td", [_vm._v(_vm._s(user.id))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(user.name))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(user.email))]),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    _vm._l(user.roles, function(role) {
-                      return _c("span", [
+                  !user.isEdit
+                    ? _c("td", [
                         _vm._v(
-                          "\n    \t\t\t\t\t\t" +
-                            _vm._s(role.name) +
-                            "\n    \t\t\t\t\t"
+                          "\n                        " +
+                            _vm._s(user.name) +
+                            "\n                    "
                         )
                       ])
-                    })
-                  ),
+                    : _c("td", [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model.lazy",
+                              value: user.name,
+                              expression: "user.name",
+                              modifiers: { lazy: true }
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text" },
+                          domProps: { value: user.name },
+                          on: {
+                            change: function($event) {
+                              _vm.$set(user, "name", $event.target.value)
+                            }
+                          }
+                        })
+                      ]),
                   _vm._v(" "),
-                  _vm.checkIsAdmin
+                  !user.isEdit
                     ? _c("td", [
-                        _c("button", { staticClass: "btn btn-success" }, [
-                          _vm._v(
-                            "\n                            Edit\n                        "
-                          )
-                        ]),
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(user.email) +
+                            "\n                    "
+                        )
+                      ])
+                    : _c("td", [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model.lazy",
+                              value: user.email,
+                              expression: "user.email",
+                              modifiers: { lazy: true }
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "text" },
+                          domProps: { value: user.email },
+                          on: {
+                            change: function($event) {
+                              _vm.$set(user, "email", $event.target.value)
+                            }
+                          }
+                        })
+                      ]),
+                  _vm._v(" "),
+                  !user.isEdit
+                    ? _c(
+                        "td",
+                        _vm._l(user.roles, function(role) {
+                          return _c("span", [
+                            _vm._v(
+                              "\n    \t\t\t\t\t\t" +
+                                _vm._s(role.name) +
+                                "\n    \t\t\t\t\t"
+                            )
+                          ])
+                        })
+                      )
+                    : _c("td", [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model.lazy",
+                                value: user.roles[0].name,
+                                expression: "user.roles[0].name",
+                                modifiers: { lazy: true }
+                              }
+                            ],
+                            staticClass: "form-control",
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  user.roles[0],
+                                  "name",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { value: "employee" } }, [
+                              _vm._v("Employee")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "saler" } }, [
+                              _vm._v("Saler")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "admin" } }, [
+                              _vm._v("Admin")
+                            ])
+                          ]
+                        )
+                      ]),
+                  _vm._v(" "),
+                  _vm.checkIsAdmin && !user.isEdit
+                    ? _c("td", [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success",
+                            on: {
+                              click: function($event) {
+                                user.isEdit = true
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                            Edit\n                        "
+                            )
+                          ]
+                        ),
                         _vm._v(" "),
                         _c("button", { staticClass: "btn btn-danger" }, [
                           _vm._v("Delete")
                         ])
                       ])
-                    : _vm._e()
+                    : _c("td", [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary",
+                            on: {
+                              click: function($event) {
+                                _vm.updateUser(user)
+                              }
+                            }
+                          },
+                          [_vm._v("Save")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger",
+                            on: {
+                              click: function($event) {
+                                user.isEdit = false
+                              }
+                            }
+                          },
+                          [_vm._v("Cancel")]
+                        )
+                      ])
                 ])
               })
             )

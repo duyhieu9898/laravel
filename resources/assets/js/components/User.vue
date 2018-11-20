@@ -47,20 +47,41 @@
                     </tr>
                 </thead>
                 <tbody v-if="list_users.length">
-                    <tr v-for="user in list_users">
+                    <tr v-for="(user, index) in list_users">
                         <td>{{ user.id }}</td>
-                        <td>{{ user.name }}</td>
-                        <td>{{ user.email }}</td>
-                        <td>
+                        <td v-if="!user.isEdit">
+                            {{ user.name }}
+                        </td>
+                        <td v-else>
+                            <input type="text" class="form-control" v-model.lazy="user.name">
+                        </td>
+                        <td v-if="!user.isEdit">
+                            {{ user.email }}
+                        </td>
+                        <td v-else>
+                            <input type="text" class="form-control" v-model.lazy="user.email">
+                        </td>
+                        <td v-if="!user.isEdit">
                             <span v-for="role in user.roles">
         						{{ role.name }}
         					</span>
                         </td>
-                        <td v-if="checkIsAdmin">
-                            <button class="btn btn-success">
+                        <td v-else>
+                            <select class="form-control" v-model.lazy="user.roles[0].name">
+                                <option value="employee">Employee</option>
+                                <option value="saler">Saler</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </td>
+                        <td v-if="checkIsAdmin&&!user.isEdit">
+                            <button class="btn btn-success" @click="user.isEdit = true">
                                 Edit
                             </button>
                             <button class="btn btn-danger">Delete</button>
+                        </td>
+                        <td v-else>
+                            <button class="btn btn-primary" @click="updateUser(user)">Save</button>
+                            <button class="btn btn-danger" @click="user.isEdit = false ">Cancel</button>
                         </td>
                     </tr>
                 </tbody>
@@ -149,6 +170,17 @@ export default {
                 })
                 .catch(error => {
                     console.log(error)
+                })
+        },
+        updateUser(user) {
+            axios.put('/users/' + user.id, { id: user.id, name: user.name, email: user.email, role: user.roles[0].name })
+                .then(response => {
+                    console.log(response.data.result);
+                    user.isEdit = false;
+                })
+                .catch(errors => {
+                    if (errors.response.data.errors)
+                        console.log(errors.response.data.errors);
                 })
         },
         validateEmail(email) {

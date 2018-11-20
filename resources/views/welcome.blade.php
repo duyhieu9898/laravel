@@ -9,15 +9,15 @@
     <body>
         <div id="app">
             <my-component ></my-component>
-        {{-- @{{message}} --}}
-        <conditional-rendering ></conditional-rendering>
-        <user-dashboard></user-dashboard>
-        {{-- <life-cycle></life-cycle> --}}
-        <re-render></re-render>
-        <binding-html></binding-html>
-        <input-binding></input-binding>
-        <event-handling></event-handling>
-        <api-calling></api-calling>
+            {{-- @{{message}} --}}
+            <conditional-rendering ></conditional-rendering>
+            <user-dashboard></user-dashboard>
+            {{-- <life-cycle></life-cycle> --}}
+            <re-render></re-render>
+            <binding-html></binding-html>
+            <input-binding></input-binding>
+            <event-handling></event-handling>
+            <api-calling></api-calling>
             <user></user>
         </div>
         <div id="app-2">

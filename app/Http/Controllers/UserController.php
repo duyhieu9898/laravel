@@ -102,7 +102,18 @@ class USerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $users = User::where('id', $id)->get()->load('roles');
+        dd($users);
+        die();
+        $role = Role::where('name', $request->input('role'))->first();
+        $user = User::find($id);
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->save();
+        $user->roles()->attach($role);
+        return response([
+            'result' => 'success',
+        ], 200);
     }
 
     /**
